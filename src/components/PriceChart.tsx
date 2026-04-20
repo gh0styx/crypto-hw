@@ -3,11 +3,11 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { useState, useEffect, useMemo } from 'react';
-import { 
-  Area, 
-  AreaChart, 
-  ResponsiveContainer, 
-  Tooltip, 
+import {
+  Area,
+  AreaChart,
+  ResponsiveContainer,
+  Tooltip,
   YAxis,
   ReferenceLine
 } from 'recharts';
@@ -16,13 +16,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function PriceChart() {
   const [isMounted, setIsMounted] = useState(false);
   const { history, selectedSymbol, loading, marketData } = useSelector((state: RootState) => state.prices);
-  
+
   const data = history[selectedSymbol] || [];
-  
-  // Calculate a simulated "previous close" from data or default it for the reference line
+
+
   const prevClose = useMemo(() => {
     if (data.length > 0) {
-      return data[0].price; // Use earliest data point as previous close for 24h view
+      return data[0].price;
     }
     return 0;
   }, [data]);
@@ -59,13 +59,13 @@ export default function PriceChart() {
           <defs>
             <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
               {/* Very specific light teal gradient mapping */}
-              <stop offset="0%" stopColor="#15A09A" stopOpacity={0.25}/>
-              <stop offset="100%" stopColor="#15A09A" stopOpacity={0.01}/>
+              <stop offset="0%" stopColor="#15A09A" stopOpacity={0.25} />
+              <stop offset="100%" stopColor="#15A09A" stopOpacity={0.01} />
             </linearGradient>
           </defs>
-          
-          <YAxis 
-            domain={['auto', 'auto']} 
+
+          <YAxis
+            domain={['auto', 'auto']}
             orientation="right"
             axisLine={false}
             tickLine={false}
@@ -74,25 +74,25 @@ export default function PriceChart() {
             width={50}
             dx={4}
           />
-          
+
           <Tooltip content={<CustomTooltip />} />
-          
+
           {prevClose > 0 && (
-            <ReferenceLine 
-              y={prevClose} 
-              stroke="#15A09A" 
-              strokeDasharray="3 3" 
+            <ReferenceLine
+              y={prevClose}
+              stroke="#15A09A"
+              strokeDasharray="3 3"
               strokeOpacity={0.4}
             />
           )}
 
-          <Area 
-            type="monotone" 
-            dataKey="price" 
-            stroke="#15A09A" 
+          <Area
+            type="monotone"
+            dataKey="price"
+            stroke="#15A09A"
             strokeWidth={2}
-            fillOpacity={1} 
-            fill="url(#colorPrice)" 
+            fillOpacity={1}
+            fill="url(#colorPrice)"
             animationDuration={1000}
             activeDot={{ r: 4, fill: '#15A09A', stroke: '#fff', strokeWidth: 2 }}
           />

@@ -23,6 +23,7 @@ const createMockStore = () => configureStore({
       symbols: ['BTCUSDT'],
       currentPrices: { BTCUSDT: 50000 },
       history: {},
+      marketData: {},
       selectedSymbol: 'BTCUSDT',
       loading: false,
       error: null,
