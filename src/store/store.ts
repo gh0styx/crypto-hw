@@ -1,12 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import pricesReducer from './slices/pricesSlice';
-import portfolioReducer from './slices/portfolioSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import pricesReducer from "./slices/pricesSlice";
+import portfolioReducer from "./slices/portfolioSlice";
 
 export const store = configureStore({
-  reducer: {
-    prices: pricesReducer,
-    portfolio: portfolioReducer,
-  },
+	reducer: {
+		prices: pricesReducer,
+		portfolio: portfolioReducer,
+	},
 });
 
 export type RootState = ReturnType<typeof store.getState>;
